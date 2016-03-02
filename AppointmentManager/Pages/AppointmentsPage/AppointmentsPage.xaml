@@ -1,19 +1,35 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:controls="clr-namespace:AppointmentManager.Controls"
 	x:Class="AppointmentManager.AppointmentsPage"
 	Title="Appointments">
 
 	<StackLayout>
-		<Label Text="{Binding LabelText}" BackgroundColor="Gray" HeightRequest="50" XAlign="Center" YAlign="Center" />
+		<Label Text="Upcoming Appointments" BackgroundColor="Gray" HeightRequest="50" XAlign="Center" YAlign="Center" />
 
-		<ListView  x:Name="listView" ItemsSource="{Binding Appointments}">
-	            <ListView.ItemTemplate>
-	                <DataTemplate>
-	                    <TextCell Text="{Binding Id}" Detail="{Binding DoctorId}" />
-	                </DataTemplate>
-	            </ListView.ItemTemplate>
-	        </ListView>
+		<controls:ListViewWithCommand x:Name="listView" ItemClickCommand="{Binding ItemSelected}" ItemsSource="{Binding Appointments}" SeparatorVisibility="None">
+			<ListView.ItemTemplate>
+                <DataTemplate>
+
+                <ViewCell>
+	                <Grid Padding="15">
+	                    <Grid.ColumnDefinitions>
+	                        <ColumnDefinition Width="*" />
+	                        <ColumnDefinition Width="*" />
+	                        <ColumnDefinition Width="*" />
+	                    </Grid.ColumnDefinitions>
+
+	                    <Label Text="{Binding VisitDate}" XAlign="Center" FontAttributes="Bold" Grid.Column="0" />
+	                    <Label Text="{Binding VisitTime}" XAlign="Center" Grid.Column="1" />
+	                    <Label Text="{Binding Notes}" XAlign="Center" Grid.Column="2" />
+
+	                </Grid>
+	            </ViewCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+		</controls:ListViewWithCommand>
 
 	</StackLayout>
 
