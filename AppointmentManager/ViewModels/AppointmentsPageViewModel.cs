@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using AppointmentManager.Services.Appointments;
+using System;
 
 namespace AppointmentManager
 {
 	public class AppointmentsPageViewModel : BaseViewModel
 	{ 
-		public AppointmentsPageViewModel ()
-		{
-		}
+		readonly IAppointmentsService _appointmentsService = DependencyService.Get<IAppointmentsService> ();
 
 		List<Appointment> _appointments;
 		public List<Appointment> Appointments {
@@ -48,40 +48,15 @@ namespace AppointmentManager
 			}
 		}
 
-		System.Random random = new System.Random();
-
 		public async Task DoReload ()
 		{
-			Appointments = new List<Appointment> ()
-			{
-				new Appointment(){
-					Id = $"{random.Next()}",
-					DoctorId = "2",
-					Notes = "Ear doctor",
-					Time = 1456909260
-				},
-
-				new Appointment(){
-					Id = $"{random.Next()}",
-					DoctorId = "3",
-					Notes = "Ear doctor",
-					Time = 1456924512 - random.Next(1000,6000)
-				},
-
-				new Appointment(){
-					Id = $"{random.Next()}",
-					DoctorId = "5",
-					Notes = "Audiologist",
-					Time = 1456924512 - random.Next(1000,6000)
-				},
-
-				new Appointment(){
-					Id = $"{random.Next()}",
-					DoctorId = "7",
-					Notes = "Audiologist",
-					Time = 1456924512 - random.Next(1000,6000)
-				},
-			};
+			try{
+				LabelText = "Upcoming Appointments";
+				Appointments = await _appointmentsService.GetAppointments (Constants.UserId);	
+			}
+			catch(Exception e){
+				LabelText = e.Message;
+			}
 		}
 
 		async Task DoSelectedItem ()
