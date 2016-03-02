@@ -2,12 +2,11 @@
 
 namespace AppointmentManager
 {
+	/// <summary>
+	/// Class for Doctor model.
+	/// </summary>
 	public class Doctor
 	{
-		public Doctor ()
-		{
-		}
-
 		public string Id { get; set; }
 
 		public string Name { get; set; }

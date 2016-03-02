@@ -6,6 +6,9 @@ namespace AppointmentManager
 {
 	public class App : Application
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AppointmentManager.App"/> class.
+		/// </summary>
 		public App ()
 		{
 			// The root page of your application

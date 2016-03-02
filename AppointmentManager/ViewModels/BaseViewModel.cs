@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace AppointmentManager
 {
+	/// <summary>
+	/// Base view model. Realisation INotifyPropertyChanged interface.
+	/// </summary>
 	public class BaseViewModel : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -27,6 +30,10 @@ namespace AppointmentManager
 
 		bool _inactive = true;
 
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="AppointmentManager.BaseViewModel"/> is inactive.
+		/// </summary>
+		/// <value><c>true</c> if inactive; otherwise, <c>false</c>.</value>
 		public bool Inactive { 
 			get { 
 				return _inactive;
@@ -40,6 +47,9 @@ namespace AppointmentManager
 			}
 		}
 
+		/// <summary>
+		/// Changes the can execute. Should be overridden in inherited classes;
+		/// </summary>
 		public virtual void ChangeCanExecute ()
 		{
 

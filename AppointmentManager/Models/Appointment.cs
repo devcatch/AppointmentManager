@@ -2,12 +2,11 @@
 
 namespace AppointmentManager
 {
+	/// <summary>
+	/// Appointment class.
+	/// </summary>
 	public class Appointment
 	{
-		public Appointment ()
-		{
-		}
-
 		public string Id { get; set; }
 
 		public int Time { get; set; }
@@ -26,6 +25,11 @@ namespace AppointmentManager
 			get { return TimeAsDateTime(Time).ToString("t"); }
 		}
 
+		/// <summary>
+		/// Method for convert unix timestamp to DateTime.
+		/// </summary>
+		/// <returns>DateTime object.</returns>
+		/// <param name="unixTimestamp">Unix timestamp.</param>
 		static DateTime TimeAsDateTime (int unixTimestamp)
 		{
 			// Unix timestamp is seconds past epoch
