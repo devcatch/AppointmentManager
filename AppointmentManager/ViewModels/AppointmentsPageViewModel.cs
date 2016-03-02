@@ -6,17 +6,32 @@ using System;
 
 namespace AppointmentManager
 {
+	/// <summary>
+	/// View model for AppointmentsPage.
+	/// </summary>
 	public class AppointmentsPageViewModel : BaseViewModel
-	{ 
+	{
+		/// <summary>
+		/// The appointments service.
+		/// </summary>
 		readonly IAppointmentsService _appointmentsService = DependencyService.Get<IAppointmentsService> ();
 
+
 		List<Appointment> _appointments;
+		/// <summary>
+		/// The appointments property for binding.
+		/// </summary>
+		/// <value>The appointments.</value>
 		public List<Appointment> Appointments {
 			get { return _appointments; }
 			set { SetProperty (ref _appointments, value); }
 		}
 
 		string _labelText;
+		/// <summary>
+		/// The text property for binding
+		/// </summary>
+		/// <value>The label text.</value>
 		public string LabelText {
 			get { return _labelText; }
 			set { SetProperty (ref _labelText, value); }
@@ -24,6 +39,10 @@ namespace AppointmentManager
 
 		Command _itemSelected;
 
+		/// <summary>
+		/// The command for binding to the item select callback.
+		/// </summary>
+		/// <value>The item selected.</value>
 		public Command ItemSelected {
 			get {
 				return _itemSelected ??
@@ -37,6 +56,10 @@ namespace AppointmentManager
 
 		Command _reloadCommand;
 
+		/// <summary>
+		/// The command for binding to the reload data callback.
+		/// </summary>
+		/// <value>The reload command.</value>
 		public Command ReloadCommand {
 			get {
 				return _reloadCommand ??
@@ -48,6 +71,10 @@ namespace AppointmentManager
 			}
 		}
 
+		/// <summary>
+		/// Async method for reload content.
+		/// </summary>
+		/// <returns>Task</returns>
 		public async Task DoReload ()
 		{
 			try{
@@ -59,9 +86,21 @@ namespace AppointmentManager
 			}
 		}
 
+		/// <summary>
+		/// Asycn method for show detail page.
+		/// </summary>
+		/// <returns>Task</returns>
 		async Task DoSelectedItem ()
 		{
 			System.Diagnostics.Debug.WriteLine("UPDATE");
+		}
+
+
+		public override void ChangeCanExecute ()
+		{
+			base.ChangeCanExecute ();
+			ReloadCommand.ChangeCanExecute ();
+			ItemSelected.ChangeCanExecute ();
 		}
 	}
 }

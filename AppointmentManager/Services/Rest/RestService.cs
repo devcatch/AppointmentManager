@@ -9,6 +9,9 @@ using System.Net;
 
 namespace AppointmentManager.Services.Rest
 {
+	/// <summary>
+	/// Rest service. Realisation of IRestService interface.
+	/// </summary>
 	class RestService : IRestService
     {
 		#region IRestService implementation
@@ -23,6 +26,13 @@ namespace AppointmentManager.Services.Rest
 
 		#endregion
 
+		/// <summary>
+		/// Processes the response.
+		/// </summary>
+		/// <returns>Task.</returns>
+		/// <param name="response">Response of HttpClient.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <typeparam name="T">The type of return value.</typeparam>
 		async Task<T> ProcessResponse<T> (HttpResponseMessage response, CancellationToken cancellationToken)
 		{
 			var content = await response.Content.ReadAsStringAsync ();
@@ -45,6 +55,11 @@ namespace AppointmentManager.Services.Rest
 			return default(T);
 		}
 
+		/// <summary>
+		/// Contents the is empty.
+		/// </summary>
+		/// <returns><c>true</c>, if is empty was contented, <c>false</c> otherwise.</returns>
+		/// <param name="content">Content.</param>
 		static bool ContentIsEmpty (string content)
 		{
 			return string.IsNullOrWhiteSpace (content) || content == "{}";

@@ -8,6 +8,9 @@ using System.Threading;
 
 namespace AppointmentManager.Services.Appointments
 {
+	/// <summary>
+	/// Realisation of IAppointmentsService interface .
+	/// </summary>
 	public class AppointmentsService : IAppointmentsService
 	{
 		readonly IRestService _restService = DependencyService.Get<IRestService> ();
