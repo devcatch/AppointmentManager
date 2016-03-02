@@ -6,9 +6,9 @@
 	Title="Appointments">
 
 	<StackLayout>
-		<Label Text="Upcoming Appointments" BackgroundColor="Gray" HeightRequest="50" XAlign="Center" YAlign="Center" />
+		<Label Text="{Binding LabelText}" BackgroundColor="Gray" HeightRequest="50" XAlign="Center" YAlign="Center" />
 
-		<controls:ListViewWithCommand x:Name="listView" ItemClickCommand="{Binding ItemSelected}" ItemsSource="{Binding Appointments}" SeparatorVisibility="None">
+		<controls:ListViewWithCommand ItemClickCommand="{Binding ItemSelected}" ItemsSource="{Binding Appointments}" SeparatorVisibility="None">
 			<ListView.ItemTemplate>
                 <DataTemplate>
 

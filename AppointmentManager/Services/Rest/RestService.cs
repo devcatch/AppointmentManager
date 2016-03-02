@@ -29,6 +29,11 @@ namespace AppointmentManager.Services.Rest
 
 			cancellationToken.ThrowIfCancellationRequested ();
 
+			if (Constants.IsStubData && response.RequestMessage.RequestUri.AbsolutePath.Contains("/appointments")) {
+				content = Constants.Appointments;
+				response.StatusCode = HttpStatusCode.OK;
+			}
+
 			switch (response.StatusCode) {
 			case HttpStatusCode.OK:
 				if (!ContentIsEmpty (content))
@@ -36,7 +41,6 @@ namespace AppointmentManager.Services.Rest
 				break;
 			default:
 				throw new Exception (Constants.UnexpectedServerExceptionMessage);
-				break;
 			}
 			return default(T);
 		}
@@ -45,37 +49,5 @@ namespace AppointmentManager.Services.Rest
 		{
 			return string.IsNullOrWhiteSpace (content) || content == "{}";
 		}
-
-		//			System.Random random = new System.Random();
-		//			Appointments = new List<Appointment> ()
-		//			{
-		//				new Appointment(){
-		//					Id = $"{random.Next()}",
-		//					DoctorId = "2",
-		//					Notes = "Ear doctor",
-		//					Time = 1456909260
-		//				},
-		//
-		//				new Appointment(){
-		//					Id = $"{random.Next()}",
-		//					DoctorId = "3",
-		//					Notes = "Ear doctor",
-		//					Time = 1456924512 - random.Next(1000,6000)
-		//				},
-		//
-		//				new Appointment(){
-		//					Id = $"{random.Next()}",
-		//					DoctorId = "5",
-		//					Notes = "Audiologist",
-		//					Time = 1456924512 - random.Next(1000,6000)
-		//				},
-		//
-		//				new Appointment(){
-		//					Id = $"{random.Next()}",
-		//					DoctorId = "7",
-		//					Notes = "Audiologist",
-		//					Time = 1456924512 - random.Next(1000,6000)
-		//				},
-		//			};
     }
 }

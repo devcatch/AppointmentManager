@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using AppointmentManager.Services.Appointments;
+using System;
 
 namespace AppointmentManager
 {
@@ -49,7 +50,13 @@ namespace AppointmentManager
 
 		public async Task DoReload ()
 		{
-			Appointments = await _appointmentsService.GetAppointments (Constants.UserId);
+			try{
+				LabelText = "Upcoming Appointments";
+				Appointments = await _appointmentsService.GetAppointments (Constants.UserId);	
+			}
+			catch(Exception e){
+				LabelText = e.Message;
+			}
 		}
 
 		async Task DoSelectedItem ()
