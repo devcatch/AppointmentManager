@@ -51,6 +51,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Controls\" />
     <Folder Include="Services\" />
+    <Folder Include="Services\Rest\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\AppointmentsPage\AppointmentsPage.xaml">

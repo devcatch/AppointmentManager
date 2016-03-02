@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace AppointmentManager.Services.Rest
 {
-    internal class RestService : IRestService
+    class RestService : IRestService
     {
         public async Task<object> GetAsync(IRestRequest request, CancellationToken cancellationToken)
         {
@@ -33,7 +33,7 @@ namespace AppointmentManager.Services.Rest
             }
         }
 
-        private HttpClient CreateHttpClient(Dictionary<string, string> headerParams)
+        HttpClient CreateHttpClient(Dictionary<string, string> headerParams)
         {
             var httpClient = new HttpClient();
             foreach (var headerParam in headerParams)
@@ -42,13 +42,13 @@ namespace AppointmentManager.Services.Rest
             return httpClient;
         }
 
-        private async Task<string> GetRequestUrl(string host, string relativeUrl, Dictionary<string, string> parameters)
+        async Task<string> GetRequestUrl(string host, string relativeUrl, Dictionary<string, string> parameters)
         {
-            var queryString = parameters != null ? $"?{await BuildParametersString(parameters)}" : string.Empty;
-            return $"{host}{relativeUrl}{queryString}";
+			var queryString = parameters != null ? await BuildParametersString(parameters) : string.Empty;
+			return $"{host}{relativeUrl}{queryString}";
         }
 
-        private Task<string> BuildParametersString(Dictionary<string, string> parameters)
+        Task<string> BuildParametersString(Dictionary<string, string> parameters)
         {
             var content = new FormUrlEncodedContent(parameters);
             return content.ReadAsStringAsync();
