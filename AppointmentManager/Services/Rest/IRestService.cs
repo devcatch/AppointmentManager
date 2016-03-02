@@ -5,6 +5,6 @@ namespace AppointmentManager.Services.Rest
 {
     public interface IRestService
     {
-        Task<object> GetAsync(IRestRequest request, CancellationToken cancellationToken);
+		Task<T> GetAsync<T>(string requestUrl, CancellationToken cancellationToken);
     }
 }

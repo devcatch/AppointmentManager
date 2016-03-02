@@ -1,57 +1,81 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Net;
+
+[assembly: Xamarin.Forms.Dependency (typeof(AppointmentManager.Services.Rest.RestService))]
 
 namespace AppointmentManager.Services.Rest
 {
-    class RestService : IRestService
+	class RestService : IRestService
     {
-        public async Task<object> GetAsync(IRestRequest request, CancellationToken cancellationToken)
-        {
-            using (var client = CreateHttpClient(request.DefaultHeaders))
-            {
-                using (
-                    var response =
-                        await
-                            client.GetAsync(
-                                await GetRequestUrl(request.Host, request.RelativeUrl, request.UrlParameters),
-                                cancellationToken).ConfigureAwait(false))
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
+		#region IRestService implementation
 
-                    var data = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+		public async Task<T> GetAsync<T> (string requestUrl, CancellationToken cancellationToken)
+		{
+			using (var httpClient = new HttpClient()) {
+				var response = await httpClient.GetAsync (requestUrl, cancellationToken);
+				return await ProcessResponse<T> (response, cancellationToken);
+			}
+		}
 
-                    if (!response.IsSuccessStatusCode)
-                        throw new Exception("Can't load data");
+		#endregion
 
-                    return JsonConvert.DeserializeObject(data, request.ReturnValueType);
-                }
-            }
-        }
+		async Task<T> ProcessResponse<T> (HttpResponseMessage response, CancellationToken cancellationToken)
+		{
+			var content = await response.Content.ReadAsStringAsync ();
 
-        HttpClient CreateHttpClient(Dictionary<string, string> headerParams)
-        {
-            var httpClient = new HttpClient();
-            foreach (var headerParam in headerParams)
-                httpClient.DefaultRequestHeaders.Add(headerParam.Key, headerParam.Value);
+			cancellationToken.ThrowIfCancellationRequested ();
 
-            return httpClient;
-        }
+			switch (response.StatusCode) {
+			case HttpStatusCode.OK:
+				if (!ContentIsEmpty (content))
+					return JsonConvert.DeserializeObject<T> (content);
+				break;
+			default:
+				throw new Exception (Constants.UnexpectedServerExceptionMessage);
+				break;
+			}
+			return default(T);
+		}
 
-        async Task<string> GetRequestUrl(string host, string relativeUrl, Dictionary<string, string> parameters)
-        {
-			var queryString = parameters != null ? await BuildParametersString(parameters) : string.Empty;
-			return $"{host}{relativeUrl}{queryString}";
-        }
+		static bool ContentIsEmpty (string content)
+		{
+			return string.IsNullOrWhiteSpace (content) || content == "{}";
+		}
 
-        Task<string> BuildParametersString(Dictionary<string, string> parameters)
-        {
-            var content = new FormUrlEncodedContent(parameters);
-            return content.ReadAsStringAsync();
-        }
+		//			System.Random random = new System.Random();
+		//			Appointments = new List<Appointment> ()
+		//			{
+		//				new Appointment(){
+		//					Id = $"{random.Next()}",
+		//					DoctorId = "2",
+		//					Notes = "Ear doctor",
+		//					Time = 1456909260
+		//				},
+		//
+		//				new Appointment(){
+		//					Id = $"{random.Next()}",
+		//					DoctorId = "3",
+		//					Notes = "Ear doctor",
+		//					Time = 1456924512 - random.Next(1000,6000)
+		//				},
+		//
+		//				new Appointment(){
+		//					Id = $"{random.Next()}",
+		//					DoctorId = "5",
+		//					Notes = "Audiologist",
+		//					Time = 1456924512 - random.Next(1000,6000)
+		//				},
+		//
+		//				new Appointment(){
+		//					Id = $"{random.Next()}",
+		//					DoctorId = "7",
+		//					Notes = "Audiologist",
+		//					Time = 1456924512 - random.Next(1000,6000)
+		//				},
+		//			};
     }
 }
