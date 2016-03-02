@@ -34,8 +34,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Doctor.cs" />
-    <Compile Include="Pages\AppointmentsPage\MyPage.xaml.cs">
-      <DependentUpon>MyPage.xaml</DependentUpon>
+    <Compile Include="Pages\AppointmentsPage\AppointmentsPage.xaml.cs">
+      <DependentUpon>AppointmentsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -55,7 +55,7 @@
     <Folder Include="Pages\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\AppointmentsPage\MyPage.xaml">
+    <EmbeddedResource Include="Pages\AppointmentsPage\AppointmentsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

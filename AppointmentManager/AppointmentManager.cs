@@ -9,7 +9,7 @@ namespace AppointmentManager
 		public App ()
 		{
 			// The root page of your application
-			MainPage = new NavigationPage (new MyPage());
+			MainPage = new NavigationPage (new AppointmentsPage());
 		}
 
 		protected override void OnStart ()
