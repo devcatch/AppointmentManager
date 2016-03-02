@@ -10,7 +10,7 @@
 
 		<controls:ListViewWithCommand ItemClickCommand="{Binding ItemSelected}" ItemsSource="{Binding Appointments}" SeparatorVisibility="None">
 			<ListView.ItemTemplate>
-                <DataTemplate>
+				<DataTemplate>
 
                 <ViewCell>
 	                <Grid Padding="15">
@@ -27,8 +27,8 @@
 	                </Grid>
 	            </ViewCell>
 
-                </DataTemplate>
-            </ListView.ItemTemplate>
+				</DataTemplate>
+			</ListView.ItemTemplate>
 		</controls:ListViewWithCommand>
 
 	</StackLayout>
