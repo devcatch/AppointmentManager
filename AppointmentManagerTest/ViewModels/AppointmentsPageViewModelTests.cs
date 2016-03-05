@@ -24,8 +24,8 @@ namespace AppointmentManagerTestsWithMock
 			var vm = new AppointmentsPageViewModel (_appointmentsServiceMock.Object, null);
 
 			// Assert
-			Assert.IsFalse (vm.ReloadCommand == null);
-			Assert.IsFalse (vm.ItemSelectedCommand == null);
+			Assert.IsTrue (vm.ReloadCommand != null);
+			Assert.IsTrue (vm.ItemSelectedCommand != null);
 			Assert.IsTrue (vm.Appointments == null);
 			Assert.IsTrue (vm.LabelText == "Upcoming Appointments");
 		}
