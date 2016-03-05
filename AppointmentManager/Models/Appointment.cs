@@ -15,6 +15,8 @@ namespace AppointmentManager
 
 		public string Notes { get; set; }
 
+		public string DoctorType { get; set; }
+
 		public string VisitDate
 		{
 			get { return TimeAsDateTime(Time).ToString("dd.MM.yyyy"); }

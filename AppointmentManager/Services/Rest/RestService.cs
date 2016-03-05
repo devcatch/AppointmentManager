@@ -5,15 +5,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net;
 
-[assembly: Xamarin.Forms.Dependency (typeof(AppointmentManager.Services.Rest.RestService))]
-
 namespace AppointmentManager.Services.Rest
 {
 	/// <summary>
 	/// Rest service. Realisation of IRestService interface.
 	/// </summary>
 	class RestService : IRestService
-    {
+	{
 		#region IRestService implementation
 
 		public async Task<T> GetAsync<T> (string requestUrl, CancellationToken cancellationToken)
@@ -64,5 +62,5 @@ namespace AppointmentManager.Services.Rest
 		{
 			return string.IsNullOrWhiteSpace (content) || content == "{}";
 		}
-    }
+	}
 }
