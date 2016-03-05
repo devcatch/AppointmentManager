@@ -20,7 +20,10 @@ namespace AppointmentManagerTestsWithMock
 		[Test]
 		public void ViewModelWasInitialisedCorrectly ()
 		{
+			// Act
 			var vm = new AppointmentsPageViewModel (_appointmentsServiceMock.Object, null);
+
+			// Assert
 			Assert.IsFalse (vm.ReloadCommand == null);
 			Assert.IsFalse (vm.ItemSelectedCommand == null);
 			Assert.IsTrue (vm.Appointments == null);
@@ -30,15 +33,18 @@ namespace AppointmentManagerTestsWithMock
 		[Test]
 		public async void ViewModelCallAppointmentsService ()
 		{
+			// Arrange
 			var list = It.IsAny<List<Appointment>> ();
 
 			_appointmentsServiceMock.Setup (m => m.GetAppointments (It.IsAny<string> ())).ReturnsAsync (list);
 			var vm = new AppointmentsPageViewModel (_appointmentsServiceMock.Object, null);
 			await vm.DoReload ();
 
+			// Act
 			_appointmentsServiceMock.Verify(moq => moq.GetAppointments(It.IsAny<string>()),
 				Times.Once);
 
+			// Assert
 			Assert.IsTrue (vm.Appointments == list);
 		}
 	}
