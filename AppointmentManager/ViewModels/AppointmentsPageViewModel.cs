@@ -14,8 +14,15 @@ namespace AppointmentManager
 		/// <summary>
 		/// The appointments service.
 		/// </summary>
-		readonly IAppointmentsService _appointmentsService = DependencyService.Get<IAppointmentsService> ();
+		readonly IAppointmentsService _appointmentsService;
+		readonly INavigation _navigation;
 
+		public AppointmentsPageViewModel (IAppointmentsService appointmentsService, INavigation navigation)
+		{
+			_navigation = navigation;
+			_appointmentsService = appointmentsService;
+			_labelText = "Upcoming Appointments";
+		}
 
 		List<Appointment> _appointments;
 		/// <summary>
@@ -37,16 +44,16 @@ namespace AppointmentManager
 			set { SetProperty (ref _labelText, value); }
 		}
 
-		Command _itemSelected;
+		Command _itemSelectedCommand;
 
 		/// <summary>
 		/// The command for binding to the item select callback.
 		/// </summary>
 		/// <value>The item selected.</value>
-		public Command ItemSelected {
+		public Command ItemSelectedCommand {
 			get {
-				return _itemSelected ??
-					(_itemSelected = new Command (async () => {
+				return _itemSelectedCommand ??
+					(_itemSelectedCommand = new Command (async () => {
 						Inactive = false;
 						await DoSelectedItem ();
 						Inactive = true;
@@ -95,12 +102,14 @@ namespace AppointmentManager
 			System.Diagnostics.Debug.WriteLine("UPDATE");
 		}
 
-
+		/// <summary>
+		/// Changes the can execute. Should be overridden in inherited classes;
+		/// </summary>
 		public override void ChangeCanExecute ()
 		{
 			base.ChangeCanExecute ();
 			ReloadCommand.ChangeCanExecute ();
-			ItemSelected.ChangeCanExecute ();
+			ItemSelectedCommand.ChangeCanExecute ();
 		}
 	}
 }

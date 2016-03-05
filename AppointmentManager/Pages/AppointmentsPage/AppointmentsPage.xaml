@@ -22,7 +22,7 @@
 
 						<Label Text="{Binding VisitDate}" XAlign="Center" FontAttributes="Bold" Grid.Column="0" />
 						<Label Text="{Binding VisitTime}" XAlign="Center" Grid.Column="1" />
-						<Label Text="{Binding Notes}" XAlign="Center" Grid.Column="2" />
+						<Label Text="{Binding DoctorType}" XAlign="Center" Grid.Column="2" />
 
 					</Grid>
 				</ViewCell>

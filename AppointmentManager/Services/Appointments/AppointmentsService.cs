@@ -1,10 +1,7 @@
 ﻿using AppointmentManager.Services.Rest;
-using Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading;
-
-[assembly: Xamarin.Forms.Dependency (typeof(AppointmentManager.Services.Appointments.AppointmentsService))]
 
 namespace AppointmentManager.Services.Appointments
 {
@@ -13,7 +10,12 @@ namespace AppointmentManager.Services.Appointments
 	/// </summary>
 	public class AppointmentsService : IAppointmentsService
 	{
-		readonly IRestService _restService = DependencyService.Get<IRestService> ();
+		readonly IRestService _restService;
+
+		public AppointmentsService(IRestService restService)
+		{
+			_restService = restService;
+		}
 
 		#region IAppointmentsService implementation
 
@@ -26,7 +28,7 @@ namespace AppointmentManager.Services.Appointments
 		}
 
 		#endregion
-		
+
 	}
 }
 

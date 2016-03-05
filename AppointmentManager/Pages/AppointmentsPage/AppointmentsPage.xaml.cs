@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using AppointmentManager.Services.Rest;
+using AppointmentManager.Services.Appointments;
 
 namespace AppointmentManager
 {
@@ -21,8 +23,7 @@ namespace AppointmentManager
 		public AppointmentsPage ()
 		{
 			InitializeComponent ();
-			_viewModel = new AppointmentsPageViewModel ();
-			BindingContext = _viewModel;
+			BindingContext = CreateViewModel();
 		}
 
 		/// <summary>
@@ -35,6 +36,19 @@ namespace AppointmentManager
 		{
 			base.OnAppearing ();
 			await _viewModel.DoReload ();
+		}
+
+		/// <summary>
+		/// Creates the view model.
+		/// </summary>
+		/// <returns>The view model.</returns>
+		AppointmentsPageViewModel CreateViewModel()
+		{
+			var rest = new RestService ();
+			var appointmentService = new AppointmentsService (rest);
+
+			_viewModel = new AppointmentsPageViewModel (appointmentService, Navigation);
+			return _viewModel;
 		}
 	}
 }
