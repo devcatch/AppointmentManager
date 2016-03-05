@@ -99,7 +99,7 @@ namespace AppointmentManager
 		/// <returns>Task</returns>
 		async Task DoSelectedItem ()
 		{
-			System.Diagnostics.Debug.WriteLine("UPDATE");
+			await _navigation.PushAsync (new Page ());
 		}
 
 		/// <summary>

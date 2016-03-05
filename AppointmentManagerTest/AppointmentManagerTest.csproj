@@ -46,7 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
     <Compile Include="ViewModels\AppointmentsPageViewModelTests.cs" />
     <Compile Include="Services\AppointmentsServiceTests.cs" />
   </ItemGroup>
