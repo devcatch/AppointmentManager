@@ -7,10 +7,10 @@ namespace AppointmentManager
 {
 	public partial class DoctorDetailsPage : ContentPage
 	{
-		public DoctorDetailsPage ()
+		public DoctorDetailsPage (Doctor doctor)
 		{
 			InitializeComponent ();
-			BindingContext = new DoctorDetailsPageViewModel ();
+			BindingContext = new DoctorDetailsPageViewModel (doctor);
 		}
 	}
 }

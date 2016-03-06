@@ -17,7 +17,7 @@ namespace AppointmentManagerTest
 			var vm = new DoctorDetailsPageViewModel(doctor);
 
 			// Assert
-			Assert.IsTrue(vm.Doctor = doctor);
+			Assert.IsTrue(vm.Doctor == doctor);
 		}
 
 	}
