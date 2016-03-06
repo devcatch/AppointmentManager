@@ -12,11 +12,15 @@ namespace AppointmentManager
 		readonly IDoctorService _doctorService;
 		readonly INavigation _navigation;
 
-		// TODO : To propery
-		readonly Appointment _appointment;
+		public Appointment Appointment{
+			get;
+			private set;
+		}
 
-		// TODO : To propery
-		Doctor _doctor;
+		public Doctor Doctor {
+			get;
+			private set;
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AppointmentManager.AppointmentDetailsPageViewModel"/> class.
@@ -28,7 +32,7 @@ namespace AppointmentManager
 		{
 			_doctorService = doctorService;
 			_navigation = navigation;
-			_appointment = appointment;
+			Appointment = appointment;
 		}
 
 		/// <summary>
@@ -37,7 +41,7 @@ namespace AppointmentManager
 		/// <returns>The doctor info.</returns>
 		public async Task LoadDoctorInfo()
 		{
-			_doctor = await _doctorService.GetDoctorInfoAsync(_appointment.DoctorId);
+			Doctor = await _doctorService.GetDoctorInfoAsync(Appointment.DoctorId);
 			OnPropertyChanged ("DoctorName");
 		}
 
@@ -63,7 +67,7 @@ namespace AppointmentManager
 		/// <returns>The doctor detail.</returns>
 		Task OpenDoctorDetail ()
 		{
-			return _navigation.PushAsync(new DoctorDetailsPage(_doctor));
+			return _navigation.PushAsync(new DoctorDetailsPage(Doctor));
 		}
 
 		/// <summary>
@@ -79,19 +83,19 @@ namespace AppointmentManager
 		/// Gets the notes.
 		/// </summary>
 		/// <value>The notes.</value>
-		public string DoctorName => _doctor?.Name;
+		public string DoctorName => Doctor?.Name;
 
 		/// <summary>
 		/// Gets the notes.
 		/// </summary>
 		/// <value>The notes.</value>
-		public string Notes => _appointment?.Notes;
+		public string Notes => Appointment?.Notes;
 
 		/// <summary>
 		/// Gets the time.
 		/// </summary>
 		/// <value>The time.</value>
-		public string Time => (_appointment != null) ? _appointment.VisitDate + " " + _appointment.VisitTime : null;
+		public string Time => (Appointment != null) ? Appointment.VisitDate + " " + Appointment.VisitTime : null;
 	}
 }
 
