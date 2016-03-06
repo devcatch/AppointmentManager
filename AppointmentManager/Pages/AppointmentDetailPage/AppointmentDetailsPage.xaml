@@ -10,7 +10,7 @@
 			<Label Text="Dr. Name" />
 			<Label Text="{Binding DoctorsName}" />
 			<Label Text="Notes" />
-			<Label Text="{Binding Notes}">
+			<Label Text="{Binding Notes}" />
 		</StackLayout>
 	</ScrollView>
 
