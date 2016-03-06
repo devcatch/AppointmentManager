@@ -48,13 +48,13 @@
     <Compile Include="Services\DoctorService\DoctorService.cs" />
     <Compile Include="Services\AppointmentsService\AppointmentsService.cs" />
     <Compile Include="Services\AppointmentsService\IAppointmentsService.cs" />
-    <Compile Include="Pages\DoctorDetailsPage.xaml.cs">
-      <DependentUpon>DoctorDetailsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\AppointmentDetailsPage\AppointmentDetailsPage.xaml.cs">
       <DependentUpon>AppointmentDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\DoctorDetailsPageViewModel.cs" />
+    <Compile Include="Pages\DoctorDetailsPage\DoctorDetailsPage.xaml.cs">
+      <DependentUpon>DoctorDetailsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.1.0.6524\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.1.0.6524\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -67,15 +67,16 @@
     <Folder Include="Services\DoctorService\" />
     <Folder Include="Services\AppointmentsService\" />
     <Folder Include="Pages\AppointmentDetailsPage\" />
+    <Folder Include="Pages\DoctorDetailsPage\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\AppointmentsPage\AppointmentsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\DoctorDetailsPage.xaml">
+    <EmbeddedResource Include="Pages\AppointmentDetailsPage\AppointmentDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\AppointmentDetailsPage\AppointmentDetailsPage.xaml">
+    <EmbeddedResource Include="Pages\DoctorDetailsPage\DoctorDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

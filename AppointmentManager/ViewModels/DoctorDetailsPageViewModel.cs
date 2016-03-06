@@ -4,7 +4,7 @@ namespace AppointmentManager
 {
 	public class DoctorDetailsPageViewModel
 	{
-		public DoctorDetailsPageViewModel (Doctor )
+		public DoctorDetailsPageViewModel ()
 		{
 		}
 	}
