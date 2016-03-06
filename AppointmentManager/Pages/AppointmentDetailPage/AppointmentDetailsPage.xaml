@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="AppointmentManager.AppointmentDetailsPage">
+	x:Class="AppointmentManager.AppointmentDetailsPage"
+	Title="Details">
 
-	<ScrollView Padding="20" BackgroundColor="Aqua">
+	<ScrollView Padding="20" >
 		<StackLayout Spacing="10">
 			<Label Text="Date/Time" />
-			<Label Text="{Binding Time}" />
+			<Label Text="{Binding Time}" HeightRequest="80" FontAttributes="Bold"/>
 			<Label Text="Dr. Name" />
-			<Label Text="{Binding DoctorsName}" />
+			<Label Text="{Binding DoctorName}" HeightRequest="80" FontAttributes="Bold"/>
 			<Label Text="Notes" />
-			<Label Text="{Binding Notes}" />
+			<Label Text="{Binding Notes}" HeightRequest="80" FontAttributes="Bold"/>
 		</StackLayout>
 	</ScrollView>
 

@@ -1,7 +1,6 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using AppointmentManager.Services.DoctorService;
 using Xamarin.Forms;
-using System.Threading.Tasks;
 
 namespace AppointmentManager
 {
@@ -30,10 +29,20 @@ namespace AppointmentManager
 		}
 
 		/// <summary>
-		/// Gets the time.
+		/// Loads the doctor info.
 		/// </summary>
-		/// <value>The time.</value>
-		public string Time => (_appointment != null) ? _appointment.VisitDate + " " + _appointment.VisitTime : null;
+		/// <returns>The doctor info.</returns>
+		public async Task LoadDoctorInfo()
+		{
+			_doctor = await _doctorService.GetDoctorInfoAsync(_appointment.DoctorId);
+			OnPropertyChanged ("DoctorName");
+		}
+
+		/// <summary>
+		/// Gets the notes.
+		/// </summary>
+		/// <value>The notes.</value>
+		public string DoctorName => _doctor?.Name;
 
 		/// <summary>
 		/// Gets the notes.
@@ -41,10 +50,12 @@ namespace AppointmentManager
 		/// <value>The notes.</value>
 		public string Notes => _appointment?.Notes;
 
-		public async Task LoadDoctorInfo()
-		{
-			_doctor = await _doctorService.GetDoctorInfoAsync(_appointment.DoctorId);
-		}
+		/// <summary>
+		/// Gets the time.
+		/// </summary>
+		/// <value>The time.</value>
+		public string Time => (_appointment != null) ? _appointment.VisitDate + " " + _appointment.VisitTime : null;
+
 	}
 }
 

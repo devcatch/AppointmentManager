@@ -20,6 +20,18 @@ namespace AppointmentManager
 		}
 
 		/// <summary>
+		/// Raises the appearing event.
+		/// </summary>
+		/// <remarks>
+		/// Overrided for loading content. Constructor can't be used for async code
+		/// </remarks>
+		protected override async void OnAppearing ()
+		{
+			base.OnAppearing ();
+			await _viewModel.LoadDoctorInfo ();
+		}
+
+		/// <summary>
 		/// Creates the view model.
 		/// </summary>
 		/// <returns>The view model.</returns>
