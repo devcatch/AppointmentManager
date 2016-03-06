@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Moq;
 using AppointmentManager;
 using Xamarin.Forms;
+using AppointmentManager.Services.DoctorService;
 
 namespace AppointmentManagerTest
 {

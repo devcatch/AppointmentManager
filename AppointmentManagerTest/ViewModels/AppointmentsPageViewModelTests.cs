@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Moq;
 using AppointmentManager;
-using AppointmentManager.Services.Appointments;
+using AppointmentManager.Services.AppointmentsService;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
@@ -38,14 +38,14 @@ namespace AppointmentManagerTestsWithMock
 		{
 			// Arrange
 			var list = It.IsAny<List<Appointment>> ();
-			_appointmentsServiceMock.Setup (m => m.GetAppointments (It.IsAny<string> ())).ReturnsAsync (list);
+			_appointmentsServiceMock.Setup (m => m.GetAppointmentsAsync (It.IsAny<string> ())).ReturnsAsync (list);
 			var vm = new AppointmentsPageViewModel (_appointmentsServiceMock.Object, null);
 
 			// Act
 			await vm.DoReload ();
 
 			// Assert
-			_appointmentsServiceMock.Verify(moq => moq.GetAppointments(It.IsAny<string>()),
+			_appointmentsServiceMock.Verify(moq => moq.GetAppointmentsAsync(It.IsAny<string>()),
 				Times.Once);
 
 			Assert.IsTrue (vm.Appointments == list);

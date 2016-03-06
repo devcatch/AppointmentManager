@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Threading.Tasks;
-using AppointmentManager.Services.Appointments;
+using AppointmentManager.Services.AppointmentsService;
 using System;
 
 namespace AppointmentManager
@@ -86,7 +86,7 @@ namespace AppointmentManager
 		{
 			try{
 				LabelText = "Upcoming Appointments";
-				Appointments = await _appointmentsService.GetAppointments (Constants.UserId);	
+				Appointments = await _appointmentsService.GetAppointmentsAsync (Constants.UserId);	
 			}
 			catch(Exception e){
 				LabelText = e.Message;

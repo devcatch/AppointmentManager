@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace AppointmentManager.Services.Appointments
+namespace AppointmentManager.Services.AppointmentsService
 {
 	/// <summary>
 	/// Realisation of IAppointmentsService interface .
@@ -19,7 +19,7 @@ namespace AppointmentManager.Services.Appointments
 
 		#region IAppointmentsService implementation
 
-		public Task<List<Appointment>> GetAppointments (string userId)
+		public Task<List<Appointment>> GetAppointmentsAsync (string userId)
 		{
 			return _restService.GetAsync<List<Appointment>> (
 				$"http://service.appointments.com/users/{userId}/appointments",
