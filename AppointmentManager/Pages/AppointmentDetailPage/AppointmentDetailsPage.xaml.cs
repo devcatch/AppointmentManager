@@ -13,6 +13,13 @@ namespace AppointmentManager
 
 		AppointmentDetailsPageViewModel _viewModel;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AppointmentManager.AppointmentDetailsPage"/> class.
+		/// </summary>
+		/// <param name="appointment">Appointment.</param>
+		/// <remarks>
+		/// Create new view model and set it to BindingContext. All UI in XAML
+		/// </remarks>
 		public AppointmentDetailsPage (Appointment appointment)
 		{
 			InitializeComponent ();

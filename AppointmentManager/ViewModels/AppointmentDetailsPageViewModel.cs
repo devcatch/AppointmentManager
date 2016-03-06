@@ -54,9 +54,22 @@ namespace AppointmentManager
 			}
 		}
 
+		/// <summary>
+		/// Opens the doctor detail.
+		/// </summary>
+		/// <returns>The doctor detail.</returns>
 		Task OpenDoctorDetail ()
 		{
 			return _navigation.PushAsync(new Page());
+		}
+
+		/// <summary>
+		/// Changes the can execute. Should be overridden in inherited classes;
+		/// </summary>
+		public override void ChangeCanExecute ()
+		{
+			base.ChangeCanExecute ();
+			ClickDoctorNameCommand.ChangeCanExecute ();
 		}
 
 		/// <summary>
@@ -76,7 +89,6 @@ namespace AppointmentManager
 		/// </summary>
 		/// <value>The time.</value>
 		public string Time => (_appointment != null) ? _appointment.VisitDate + " " + _appointment.VisitTime : null;
-
 	}
 }
 
