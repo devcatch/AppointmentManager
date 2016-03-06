@@ -99,7 +99,7 @@ namespace AppointmentManager
 		/// <returns>Task</returns>
 		async Task DoSelectedItem (Appointment appointment)
 		{
-			await _navigation.PushAsync (new AppointmentDetailsPage (appointment));
+			await _navigation.PushAsync (new AppointmentDetailsPage(appointment));
 		}
 
 		/// <summary>
