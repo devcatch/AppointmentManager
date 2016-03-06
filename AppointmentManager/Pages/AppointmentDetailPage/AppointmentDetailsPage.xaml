@@ -9,7 +9,11 @@
 			<Label Text="Date/Time" />
 			<Label Text="{Binding Time}" HeightRequest="80" FontAttributes="Bold"/>
 			<Label Text="Dr. Name" />
-			<Label Text="{Binding DoctorName}" HeightRequest="80" FontAttributes="Bold"/>
+			<Label Text="{Binding DoctorName}" HeightRequest="80" FontAttributes="Bold">
+				<Label.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding ClickDoctorNameCommand}"/>
+				</Label.GestureRecognizers>
+			</Label>
 			<Label Text="Notes" />
 			<Label Text="{Binding Notes}" HeightRequest="80" FontAttributes="Bold"/>
 		</StackLayout>

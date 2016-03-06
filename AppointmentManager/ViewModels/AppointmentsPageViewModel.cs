@@ -97,9 +97,9 @@ namespace AppointmentManager
 		/// Asycn method for show detail page.
 		/// </summary>
 		/// <returns>Task</returns>
-		async Task DoSelectedItem (Appointment appointment)
+		Task DoSelectedItem (Appointment appointment)
 		{
-			await _navigation.PushAsync (new AppointmentDetailsPage(appointment));
+			return _navigation.PushAsync (new AppointmentDetailsPage(appointment));
 		}
 
 		/// <summary>

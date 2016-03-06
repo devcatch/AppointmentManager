@@ -38,6 +38,27 @@ namespace AppointmentManager
 			OnPropertyChanged ("DoctorName");
 		}
 
+		Command _doctorNameClick;
+		/// <summary>
+		/// Gets the click doctor name command.
+		/// </summary>
+		/// <value>The click doctor name command.</value>
+		public Command ClickDoctorNameCommand {
+			get {
+				return _doctorNameClick ??
+					(_doctorNameClick = new Command (async () => {
+						Inactive = false;
+						await OpenDoctorDetail ();
+						Inactive = true;
+					}, () => Inactive));
+			}
+		}
+
+		Task OpenDoctorDetail ()
+		{
+			return _navigation.PushAsync(new Page());
+		}
+
 		/// <summary>
 		/// Gets the notes.
 		/// </summary>

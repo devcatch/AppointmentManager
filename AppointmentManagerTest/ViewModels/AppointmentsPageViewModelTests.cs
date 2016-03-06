@@ -11,17 +11,14 @@ namespace AppointmentManagerTests
 	public class AppointmentsPageViewModelTests
 	{
 		Mock<IAppointmentsService> _appointmentsServiceMock;
-		Mock<INavigation> _navigationMock;
+//		Mock<INavigation> _navigationMock;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_appointmentsServiceMock = new Mock<IAppointmentsService>();
-			_navigationMock = new Mock<INavigation>();
-			typeof(AppointmentDetailsPage).TypeInitializer.Invoke(null, null);
+//			_navigationMock = new Mock<INavigation>();
 		}
-
-
 
 		[Test]
 		public void ViewModelWasInitialisedCorrectly ()
@@ -54,28 +51,22 @@ namespace AppointmentManagerTests
 			Assert.IsTrue (vm.Appointments == list);
 		}
 
-		[Test]
-		public void ViewModelPushPageAfteSelectItem ()
-		{
-			// Arrange
-			var appointment =new Mock<Appointment>().SetupAllProperties().Object;
-			_navigationMock.Setup (moq => moq.PushAsync (It.IsAny<Page>()));
-			var vm = new AppointmentsPageViewModel (null, _navigationMock.Object);
-
-			AppointmentDetailsPage.CreateAppointmentDetailsPage = (obj) =>
-			{
-				return (Page) new System.Object();
-			};
-
-			// Act
-			vm.ItemSelectedCommand.Execute(appointment);
-
-			// Assert
-			_navigationMock.Verify(moq => moq.PushAsync(null), Times.Once);
-			Assert.True(true);
-		}
-
 //		Xamarin.Forms.Page can't be created without platform
+//		[Test]
+//		public void ViewModelPushPageAfteSelectItem ()
+//		{
+//			// Arrange
+//			var appointment =new Mock<Appointment>().SetupAllProperties().Object;
+//			_navigationMock.Setup (moq => moq.PushAsync (It.IsAny<Page>()));
+//			var vm = new AppointmentsPageViewModel (null, _navigationMock.Object);
+//
+//			// Act
+//			vm.ItemSelectedCommand.Execute(appointment);
+//
+//			// Assert
+//			_navigationMock.Verify(moq => moq.PushAsync(null), Times.Once);
+//			Assert.True(true);
+//		}
 //		[Test]
 //		public void ViewModelPushRightDetailsPage ()
 //		{
