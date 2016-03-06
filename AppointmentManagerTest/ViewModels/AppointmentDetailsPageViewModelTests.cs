@@ -24,16 +24,17 @@ namespace AppointmentManagerTest
 		public void ViewModelWasInitialisedCorrectly ()
 		{
 			// Arrange
+			var appoint = Mock.Of<Appointment>( m =>
+				m.Time == 12313123 &&
+				m.Notes == "Some notes");
 
 			// Act
-			var vm = new AppointmentDetailsPageViewModel (_doctorInfoServiceMock.Object, _navigationMock.Object, It.IsNotNull<Appointment>());
+			var vm = new AppointmentDetailsPageViewModel (_doctorInfoServiceMock.Object, _navigationMock.Object, appoint);
 
 			// Assert
 			Assert.IsTrue(vm.Time != null);
-			Assert.IsTrue(vm.Notes != null);
+			Assert.IsTrue(vm.Notes == "Some notes");
 		}
-
-
 	}
 }
 

@@ -19,6 +19,11 @@ namespace AppointmentManager.Services.AppointmentsService
 
 		#region IAppointmentsService implementation
 
+		/// <summary>
+		/// Method for gets the appointments from server.
+		/// </summary>
+		/// <returns>The List of appointments.</returns>
+		/// <param name="userId">User identifier.</param>
 		public Task<List<Appointment>> GetAppointmentsAsync (string userId)
 		{
 			return _restService.GetAsync<List<Appointment>> (

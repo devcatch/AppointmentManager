@@ -5,7 +5,7 @@ using AppointmentManager.Services.AppointmentsService;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace AppointmentManagerTestsWithMock
+namespace AppointmentManagerTests
 {
 	[TestFixture]
 	public class AppointmentsPageViewModelTests
@@ -37,15 +37,15 @@ namespace AppointmentManagerTestsWithMock
 		public async void ViewModelCallAppointmentsService ()
 		{
 			// Arrange
-			var list = It.IsAny<List<Appointment>> ();
-			_appointmentsServiceMock.Setup (m => m.GetAppointmentsAsync (It.IsAny<string> ())).ReturnsAsync (list);
+			var list = new Mock<List<Appointment>> ().Object;
+			_appointmentsServiceMock.Setup (m => m.GetAppointmentsAsync (It.IsNotNull<string> ())).ReturnsAsync (list);
 			var vm = new AppointmentsPageViewModel (_appointmentsServiceMock.Object, null);
 
 			// Act
 			await vm.DoReload ();
 
 			// Assert
-			_appointmentsServiceMock.Verify(moq => moq.GetAppointmentsAsync(It.IsAny<string>()),
+			_appointmentsServiceMock.Verify(moq => moq.GetAppointmentsAsync(It.IsNotNull<string>()),
 				Times.Once);
 
 			Assert.IsTrue (vm.Appointments == list);
@@ -55,7 +55,8 @@ namespace AppointmentManagerTestsWithMock
 		public void ViewModelPushPageAfteSelectItem ()
 		{
 			// Arrange
-			var page = It.IsNotNull<Page>();
+			var page = new Mock<Page>().Object;
+
 			_navigationMock.Setup (moq => moq.PushAsync (page));
 			var vm = new AppointmentsPageViewModel (null, _navigationMock.Object);
 
@@ -70,8 +71,8 @@ namespace AppointmentManagerTestsWithMock
 		public void ViewModelPushRightDetailsPage ()
 		{
 			// Arrange
-			var appointment = It.IsNotNull<Appointment>();
-			var page = It.IsNotNull<Page>();
+			var appointment = new Mock<Appointment>().Object;
+			var page = new Mock<Page>().Object;
 			_navigationMock.Setup(moq => moq.PushAsync(page));
 			var vm = new AppointmentsPageViewModel (null, _navigationMock.Object);
 
