@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="AppointmentManager.DoctorDetailsPage"
-	Title="Doctor Details">
+	xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    Title="Doctor Details">
 
 	<ScrollView Padding="20" >
 		<StackLayout Spacing="10">
@@ -13,6 +14,10 @@
 			<Label Text="Address" />
 			<Label Text="{Binding Address}" FontAttributes="Bold"/>
 			<Label Text="Map" />
+			<maps:Map WidthRequest="320" HeightRequest="200"
+						x:Name="map"
+						IsShowingUser="false"
+			            MapType="Street" />
 		</StackLayout>
 	</ScrollView>
 
