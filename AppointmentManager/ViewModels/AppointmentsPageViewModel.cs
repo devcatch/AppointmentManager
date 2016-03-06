@@ -53,11 +53,11 @@ namespace AppointmentManager
 		public Command ItemSelectedCommand {
 			get {
 				return _itemSelectedCommand ??
-					(_itemSelectedCommand = new Command (async () => {
+					(_itemSelectedCommand = new Command<Appointment> (async (obj) => {
 						Inactive = false;
-						await DoSelectedItem ();
+						await DoSelectedItem (obj);
 						Inactive = true;
-					}, () => Inactive));
+					}, (obj) => Inactive));
 			}
 		}
 
@@ -97,9 +97,9 @@ namespace AppointmentManager
 		/// Asycn method for show detail page.
 		/// </summary>
 		/// <returns>Task</returns>
-		async Task DoSelectedItem ()
+		async Task DoSelectedItem (Appointment appointment)
 		{
-			await _navigation.PushAsync (new Page ());
+			await _navigation.PushAsync (new AppointmentDetailsPage (appointment));
 		}
 
 		/// <summary>

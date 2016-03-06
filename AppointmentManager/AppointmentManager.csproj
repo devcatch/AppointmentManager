@@ -45,9 +45,10 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Services\Appointments\AppointmentsService.cs" />
     <Compile Include="Services\Appointments\IAppointmentsService.cs" />
-    <Compile Include="Pages\AppointmentDetailPage\AppointmentDetailPage.xaml.cs">
-      <DependentUpon>AppointmentDetailPage.xaml</DependentUpon>
+    <Compile Include="Pages\AppointmentDetailPage\AppointmentDetailsPage.xaml.cs">
+      <DependentUpon>AppointmentDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AppointmentDetailsPageViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.1.0.6524\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.1.0.6524\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -64,7 +65,7 @@
     <EmbeddedResource Include="Pages\AppointmentsPage\AppointmentsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\AppointmentDetailPage\AppointmentDetailPage.xaml">
+    <EmbeddedResource Include="Pages\AppointmentDetailPage\AppointmentDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

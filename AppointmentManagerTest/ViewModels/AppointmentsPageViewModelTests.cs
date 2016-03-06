@@ -16,7 +16,8 @@ namespace AppointmentManagerTestsWithMock
 		[SetUp]
 		public void SetUp()
 		{
-			_appointmentsServiceMock = new Mock<IAppointmentsService>();	
+			_appointmentsServiceMock = new Mock<IAppointmentsService>();
+			_navigationMock = new Mock<INavigation>();
 		}
 
 		[Test]
@@ -37,7 +38,6 @@ namespace AppointmentManagerTestsWithMock
 		{
 			// Arrange
 			var list = It.IsAny<List<Appointment>> ();
-
 			_appointmentsServiceMock.Setup (m => m.GetAppointments (It.IsAny<string> ())).ReturnsAsync (list);
 			var vm = new AppointmentsPageViewModel (_appointmentsServiceMock.Object, null);
 
@@ -55,14 +55,31 @@ namespace AppointmentManagerTestsWithMock
 		public void ViewModelPushPageAfteSelectItem ()
 		{
 			// Arrange
-			_navigationMock.Setup(moq => moq.PushAsync(It.IsAny<Page>()));
+			var page = It.IsNotNull<Page>();
+			_navigationMock.Setup (moq => moq.PushAsync (page));
 			var vm = new AppointmentsPageViewModel (null, _navigationMock.Object);
 
 			// Act
 			vm.ItemSelectedCommand.Execute(It.IsAny<Appointment>());
 
 			// Assert
-			_navigationMock.Verify(moq => moq.PushAsync(It.IsAny<Page>()), Times.Once);
+			_navigationMock.Verify(moq => moq.PushAsync(It.IsNotNull<Page>()), Times.Once);
+		}
+
+		[Test]
+		public void ViewModelPushRightDetailsPage ()
+		{
+			// Arrange
+			var appointment = It.IsNotNull<Appointment>();
+			var page = It.IsNotNull<Page>();
+			_navigationMock.Setup(moq => moq.PushAsync(page));
+			var vm = new AppointmentsPageViewModel (null, _navigationMock.Object);
+
+			// Act
+			vm.ItemSelectedCommand.Execute(appointment);
+
+			// Assert
+			_navigationMock.Verify(moq => moq.PushAsync(It.IsNotNull<AppointmentDetailsPage>()), Times.Once);
 		}
 	}
 }
