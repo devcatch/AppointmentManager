@@ -8,7 +8,7 @@ using AppointmentManager.Services.DoctorService;
 namespace AppointmentManagerTest
 {
 	[TestFixture]
-	public class AppointmentDetailsPageViewModelTest
+	public class AppointmentDetailsPageViewModelTests
 	{
 		Mock<IDoctorService> _doctorInfoServiceMock;
 		Mock<INavigation> _navigationMock;
