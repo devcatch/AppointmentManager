@@ -11,8 +11,11 @@ namespace AppointmentManager
 	{
 		readonly IDoctorService _doctorService;
 		readonly INavigation _navigation;
+
+		// TODO : To propery
 		readonly Appointment _appointment;
 
+		// TODO : To propery
 		Doctor _doctor;
 
 		/// <summary>
@@ -60,7 +63,7 @@ namespace AppointmentManager
 		/// <returns>The doctor detail.</returns>
 		Task OpenDoctorDetail ()
 		{
-			return _navigation.PushAsync(new Page());
+			return _navigation.PushAsync(new DoctorDetailsPage(_doctor));
 		}
 
 		/// <summary>
