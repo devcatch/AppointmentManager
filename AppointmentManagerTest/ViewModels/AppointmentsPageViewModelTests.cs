@@ -1,20 +1,23 @@
 ﻿using NUnit.Framework;
 using Moq;
 using AppointmentManager;
-using AppointmentManager.Services.Appointments;
+using AppointmentManager.Services.AppointmentsService;
 using System.Collections.Generic;
+using Xamarin.Forms;
 
-namespace AppointmentManagerTestsWithMock
+namespace AppointmentManagerTests
 {
 	[TestFixture]
 	public class AppointmentsPageViewModelTests
 	{
 		Mock<IAppointmentsService> _appointmentsServiceMock;
+//		Mock<INavigation> _navigationMock;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_appointmentsServiceMock = new Mock<IAppointmentsService>();	
+			_appointmentsServiceMock = new Mock<IAppointmentsService>();
+//			_navigationMock = new Mock<INavigation>();
 		}
 
 		[Test]
@@ -31,22 +34,53 @@ namespace AppointmentManagerTestsWithMock
 		}
 
 		[Test]
-		public async void ViewModelCallAppointmentsService ()
+		public void ViewModelCallAppointmentsService ()
 		{
 			// Arrange
-			var list = It.IsAny<List<Appointment>> ();
-
-			_appointmentsServiceMock.Setup (m => m.GetAppointments (It.IsAny<string> ())).ReturnsAsync (list);
+			var list = new Mock<List<Appointment>> ().Object;
+			_appointmentsServiceMock.Setup (m => m.GetAppointmentsAsync (It.IsNotNull<string> ())).ReturnsAsync (list);
 			var vm = new AppointmentsPageViewModel (_appointmentsServiceMock.Object, null);
-			await vm.DoReload ();
 
 			// Act
-			_appointmentsServiceMock.Verify(moq => moq.GetAppointments(It.IsAny<string>()),
-				Times.Once);
+			vm.ReloadCommand.Execute(null);
 
 			// Assert
+			_appointmentsServiceMock.Verify(moq => moq.GetAppointmentsAsync(It.IsNotNull<string>()),
+				Times.Once);
+
 			Assert.IsTrue (vm.Appointments == list);
 		}
+
+//		Xamarin.Forms.Page can't be created without platform
+//		[Test]
+//		public void ViewModelPushPageAfteSelectItem ()
+//		{
+//			// Arrange
+//			var appointment =new Mock<Appointment>().SetupAllProperties().Object;
+//			_navigationMock.Setup (moq => moq.PushAsync (It.IsAny<Page>()));
+//			var vm = new AppointmentsPageViewModel (null, _navigationMock.Object);
+//
+//			// Act
+//			vm.ItemSelectedCommand.Execute(appointment);
+//
+//			// Assert
+//			_navigationMock.Verify(moq => moq.PushAsync(null), Times.Once);
+//			Assert.True(true);
+//		}
+//		[Test]
+//		public void ViewModelPushRightDetailsPage ()
+//		{
+//			// Arrange
+//			var appointment =new Mock<Appointment>().SetupAllProperties().Object;
+//			_navigationMock.Setup (moq => moq.PushAsync (It.IsNotNull<AppointmentDetailsPage>()));
+//			var vm = new AppointmentsPageViewModel (null, _navigationMock.Object);
+//
+//			// Act
+//			vm.ItemSelectedCommand.Execute(appointment);
+//
+//			// Assert
+//			_navigationMock.Verify(moq => moq.PushAsync(It.IsNotNull<AppointmentDetailsPage>()), Times.Once);
+//		}
 	}
 }
 

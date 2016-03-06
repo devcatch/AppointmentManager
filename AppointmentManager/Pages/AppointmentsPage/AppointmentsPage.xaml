@@ -8,7 +8,7 @@
 	<StackLayout>
 		<Label Text="{Binding LabelText}" BackgroundColor="Gray" HeightRequest="50" XAlign="Center" YAlign="Center" />
 
-		<controls:ListViewWithCommand ItemClickCommand="{Binding ItemSelected}" ItemsSource="{Binding Appointments}" SeparatorVisibility="None">
+		<controls:ListViewWithCommand ItemClickCommand="{Binding ItemSelectedCommand}" ItemsSource="{Binding Appointments}" SeparatorVisibility="None">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using AppointmentManager.Services.Rest;
-using AppointmentManager.Services.Appointments;
+using AppointmentManager.Services.AppointmentsService;
 
 namespace AppointmentManager
 {

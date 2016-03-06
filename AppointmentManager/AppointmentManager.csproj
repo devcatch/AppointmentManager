@@ -43,8 +43,14 @@
     <Compile Include="Services\Rest\IRestService.cs" />
     <Compile Include="Services\Rest\RestService.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Services\Appointments\AppointmentsService.cs" />
-    <Compile Include="Services\Appointments\IAppointmentsService.cs" />
+    <Compile Include="Pages\AppointmentDetailPage\AppointmentDetailsPage.xaml.cs">
+      <DependentUpon>AppointmentDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AppointmentDetailsPageViewModel.cs" />
+    <Compile Include="Services\DoctorService\IDoctorService.cs" />
+    <Compile Include="Services\DoctorService\DoctorService.cs" />
+    <Compile Include="Services\AppointmentsService\AppointmentsService.cs" />
+    <Compile Include="Services\AppointmentsService\IAppointmentsService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.1.0.6524\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.1.0.6524\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -54,10 +60,15 @@
     <Folder Include="Controls\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Rest\" />
-    <Folder Include="Services\Appointments\" />
+    <Folder Include="Pages\AppointmentDetailPage\" />
+    <Folder Include="Services\DoctorService\" />
+    <Folder Include="Services\AppointmentsService\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\AppointmentsPage\AppointmentsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\AppointmentDetailPage\AppointmentDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

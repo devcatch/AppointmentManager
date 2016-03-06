@@ -4,7 +4,7 @@ using AppointmentManager.Services.Rest;
 using System.Threading;
 using System.Collections.Generic;
 using AppointmentManager;
-using AppointmentManager.Services.Appointments;
+using AppointmentManager.Services.AppointmentsService;
 
 namespace AppointmentManagerTest
 {
@@ -30,7 +30,7 @@ namespace AppointmentManagerTest
 			var appointmentsService = new AppointmentsService (_restServiceMock.Object);
 
 			// Act
-			var result = await appointmentsService.GetAppointments (It.IsAny<string>());
+			var result = await appointmentsService.GetAppointmentsAsync (It.IsAny<string>());
 
 			// Assert
 			_restServiceMock.Verify(moq => moq.GetAsync<List<Appointment>>(It.IsAny<string>(), It.IsAny<CancellationToken>()),
@@ -53,7 +53,7 @@ namespace AppointmentManagerTest
 			var appointmentsService = new AppointmentsService (_restServiceMock.Object);
 
 			// Act
-			var result = await appointmentsService.GetAppointments (userId);
+			var result = await appointmentsService.GetAppointmentsAsync (userId);
 
 			// Assert
 			_restServiceMock.Verify(moq => moq.GetAsync<List<Appointment>>(rightUrl, It.IsAny<CancellationToken>()),

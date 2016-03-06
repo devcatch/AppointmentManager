@@ -37,8 +37,13 @@ namespace AppointmentManager.Services.Rest
 
 			cancellationToken.ThrowIfCancellationRequested ();
 
-			if (Constants.IsStubData && response.RequestMessage.RequestUri.AbsolutePath.Contains("/appointments")) {
+			if (Constants.IsStubData && response.RequestMessage.RequestUri.AbsolutePath.Contains("/users/")) {
 				content = Constants.Appointments;
+				response.StatusCode = HttpStatusCode.OK;
+			}
+
+			if (Constants.IsStubData && response.RequestMessage.RequestUri.AbsolutePath.Contains("/doctors/")) {
+				content = Constants.DoctorInfo;
 				response.StatusCode = HttpStatusCode.OK;
 			}
 

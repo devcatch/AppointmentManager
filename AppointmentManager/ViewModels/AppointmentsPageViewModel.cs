@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Threading.Tasks;
-using AppointmentManager.Services.Appointments;
+using AppointmentManager.Services.AppointmentsService;
 using System;
 
 namespace AppointmentManager
@@ -53,11 +53,11 @@ namespace AppointmentManager
 		public Command ItemSelectedCommand {
 			get {
 				return _itemSelectedCommand ??
-					(_itemSelectedCommand = new Command (async () => {
+					(_itemSelectedCommand = new Command<Appointment> (async (obj) => {
 						Inactive = false;
-						await DoSelectedItem ();
+						await DoSelectedItem (obj);
 						Inactive = true;
-					}, () => Inactive));
+					}, (obj) => Inactive));
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace AppointmentManager
 		{
 			try{
 				LabelText = "Upcoming Appointments";
-				Appointments = await _appointmentsService.GetAppointments (Constants.UserId);	
+				Appointments = await _appointmentsService.GetAppointmentsAsync (Constants.UserId);	
 			}
 			catch(Exception e){
 				LabelText = e.Message;
@@ -97,9 +97,9 @@ namespace AppointmentManager
 		/// Asycn method for show detail page.
 		/// </summary>
 		/// <returns>Task</returns>
-		async Task DoSelectedItem ()
+		Task DoSelectedItem (Appointment appointment)
 		{
-			System.Diagnostics.Debug.WriteLine("UPDATE");
+			return _navigation.PushAsync (new AppointmentDetailsPage(appointment));
 		}
 
 		/// <summary>
